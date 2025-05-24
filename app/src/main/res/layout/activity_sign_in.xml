@@ -67,7 +67,7 @@
             android:layout_height="wrap_content"
             android:text="Sign In"
             android:textColor="#FFFFFF"
-            android:background="@drawable/bg_button"
+            style="@style/Widget.App.Button.Filled"
             android:layout_marginTop="20dp"/>
 
         <!-- Sign Up Link -->
