@@ -1,137 +1,169 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="#FAFAFA"
-    android:fitsSystemWindows="true"
-    android:fillViewport="true"
-    android:padding="24dp"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="?attr/colorSurface"
+    android:fitsSystemWindows="true">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center_horizontal"
-        android:layout_margin="16dp">
+        android:fillViewport="true"
+        android:padding="16dp">
 
-        <!-- Profile Header -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:background="@drawable/bg_card"
-            android:padding="16dp"
-            android:gravity="center_vertical"
-            android:layout_marginBottom="24dp">
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/img_profile"
-                android:layout_width="64dp"
-                android:layout_height="64dp"
-                android:src="@drawable/ic_profile_placeholder"
-                android:scaleType="centerCrop"
-                android:background="@drawable/bg_circle"
-                android:layout_marginEnd="16dp"/>
-
-            <TextView
-                android:id="@+id/text_welcome"
-                android:layout_width="wrap_content"
+            <!-- Profile Header -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Welcome, User!"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:textColor="#222"/>
-        </LinearLayout>
+                android:layout_marginBottom="24dp"
+                app:cardBackgroundColor="?attr/colorSurface"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="2dp">
 
-        <!-- Stats Cards -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="2"
-            android:layout_marginBottom="24dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="16dp">
 
+                    <ImageView
+                        android:id="@+id/img_profile"
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:layout_marginEnd="16dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_profile_placeholder" />
+
+                    <TextView
+                        android:id="@+id/text_welcome"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Welcome, User!"
+                        android:textAppearance="@style/TextAppearance.App.Headline6"
+                        android:textColor="?attr/colorOnSurface" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Stats Cards -->
             <LinearLayout
-                android:layout_width="0dp"
-                android:layout_weight="1"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:background="@drawable/bg_card"
-                android:padding="16dp"
-                android:layout_marginEnd="8dp">
+                android:layout_marginBottom="24dp"
+                android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Quizzes Taken"
-                    android:textSize="14sp"
-                    android:textColor="#666"/>
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1"
+                    app:cardBackgroundColor="?attr/colorSurface"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="2dp">
 
-                <TextView
-                    android:id="@+id/text_quizzes"
-                    android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Quizzes Taken"
+                            android:textAppearance="@style/TextAppearance.App.Body2"
+                            android:textColor="?attr/colorOnSurfaceVariant" />
+
+                        <TextView
+                            android:id="@+id/text_quizzes"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="12"
+                            android:textAppearance="@style/TextAppearance.App.Headline5"
+                            android:textColor="#1E88E5" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="12"
-                    android:textSize="24sp"
-                    android:textStyle="bold"
-                    android:textColor="#1E88E5"
-                    android:layout_marginTop="4dp"/>
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    app:cardBackgroundColor="?attr/colorSurface"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="2dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Best Score"
+                            android:textAppearance="@style/TextAppearance.App.Body2"
+                            android:textColor="?attr/colorOnSurfaceVariant" />
+
+                        <TextView
+                            android:id="@+id/text_best_score"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="95%"
+                            android:textAppearance="@style/TextAppearance.App.Headline5"
+                            android:textColor="#1E88E5" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_weight="1"
+            <!-- Action Buttons -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_start_quiz"
+                style="@style/Widget.App.Button.Filled"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:background="@drawable/bg_card"
-                android:padding="16dp"
-                android:layout_marginStart="8dp">
+                android:layout_marginBottom="12dp"
+                android:text="Start New Quiz" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Best Score"
-                    android:textSize="14sp"
-                    android:textColor="#666"/>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_view_history"
+                style="@style/Widget.App.Button.Filled"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:text="View History" />
 
-                <TextView
-                    android:id="@+id/text_best_score"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="95%"
-                    android:textSize="24sp"
-                    android:textStyle="bold"
-                    android:textColor="#1E88E5"
-                    android:layout_marginTop="4dp"/>
-            </LinearLayout>
+            <!-- Logout Button -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_logout"
+                style="@style/Widget.App.Button.Outlined"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Logout" />
+
         </LinearLayout>
+    </ScrollView>
 
-        <!-- Action Buttons -->
-        <Button
-            android:id="@+id/btn_start_quiz"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Start New Quiz"
-            android:textColor="#FFFFFF"
-            android:background="@drawable/bg_button"
-            android:layout_marginBottom="12dp"/>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_add_question"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:contentDescription="@string/addQuestion"
+        app:backgroundTint="#1E88E5"
+        app:elevation="4dp"
+        app:srcCompat="@drawable/ic_add"
+        app:tint="#FFFF" />
 
-        <Button
-            android:id="@+id/btn_view_history"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="View History"
-            android:textColor="#FFFFFF"
-            android:background="@drawable/bg_button"
-            android:layout_marginBottom="24dp"/>
-
-        <!-- Footer Logout -->
-        <Button
-            android:id="@+id/btn_logout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Logout"
-            android:textColor="#FFFFFF"
-            android:background="@drawable/bg_button"/>
-    </LinearLayout>
-</ScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

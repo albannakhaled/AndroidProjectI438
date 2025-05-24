@@ -3,6 +3,7 @@ package com.i438.quizappproject.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -10,12 +11,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.i438.quizappproject.MainActivity;
@@ -23,7 +20,7 @@ import com.i438.quizappproject.R;
 
 public class SignInActivity extends AppCompatActivity {
 
-    private EditText emailInput, passwordInput;
+    private EditText usernameInput, passwordInput;
     private Button signInButton;
     private TextView signUpLink;
     private ProgressBar progressBar;
@@ -35,7 +32,7 @@ public class SignInActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
 
-        emailInput = findViewById(R.id.input_email);
+        usernameInput = findViewById(R.id.input_username);
         passwordInput = findViewById(R.id.input_password);
         signInButton = findViewById(R.id.btn_sign_in);
         signUpLink = findViewById(R.id.link_to_signup);
@@ -46,26 +43,34 @@ public class SignInActivity extends AppCompatActivity {
         signInButton.setOnClickListener(view -> signIn());
 
         signUpLink.setOnClickListener(view -> {
-            // navigate to sign up screen
             startActivity(new Intent(SignInActivity.this, SignUpActivity.class));
         });
     }
 
     private void signIn() {
-        String email = emailInput.getText().toString().trim();
+        String username = usernameInput.getText().toString().trim();
         String password = passwordInput.getText().toString().trim();
 
-        if (TextUtils.isEmpty(email)) {
-            emailInput.setError("Email is required");
+        if (TextUtils.isEmpty(username)) {
+            usernameInput.setError("Username is required");
+            usernameInput.requestFocus();
             return;
         }
+        String usernamePattern = "^[a-zA-Z0-9_]+$";
+        if (!username.matches(usernamePattern)) {
+            usernameInput.setError("Username can only contain letters, numbers, and underscores");
+            usernameInput.requestFocus();
+            return;
+        }
+
         if (TextUtils.isEmpty(password)) {
             passwordInput.setError("Password is required");
+            passwordInput.requestFocus();
             return;
         }
 
         progressBar.setVisibility(View.VISIBLE);
-
+        String email = username + "@i438.com";
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
                     progressBar.setVisibility(View.GONE);

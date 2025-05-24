@@ -15,6 +15,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.i438.quizappproject.storage.SharedPrefsManager;
+import com.i438.quizappproject.ui.AddQuestionActivity;
 import com.i438.quizappproject.ui.HistoryActivity;
 import com.i438.quizappproject.ui.QuizActivity;
 import com.i438.quizappproject.ui.SignInActivity;
@@ -50,8 +51,8 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(MainActivity.this, SignInActivity.class));
             finish();
         } else {
-            String email = currentUser.getEmail();
-            welcomeText.setText("Welcome, " + email);
+            String username = currentUser.getEmail();
+            welcomeText.setText(username.replace("@i438.com", ""));
         }
 
         startQuizButton.setOnClickListener(v ->
@@ -66,10 +67,14 @@ public class MainActivity extends AppCompatActivity {
         logoutButton.setOnClickListener(v -> {
             mAuth.signOut();
             startActivity(new Intent(MainActivity.this, SignInActivity.class));
+            prefsManager.clearCache();
             finish();
         });
+        findViewById(R.id.fab_add_question).setOnClickListener(v ->
+                startActivity(new Intent(MainActivity.this, AddQuestionActivity.class)));
 
     }
+
     private void updateStats() {
         int quizCount = prefsManager.getQuizCount();
         float bestScore = prefsManager.getBestScore();
@@ -77,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
         textQuizzes.setText(String.valueOf(quizCount));
         textBestScore.setText(String.format(Locale.getDefault(), "%.1f%%", bestScore));
     }
+
     @Override
     protected void onResume() {
         super.onResume();

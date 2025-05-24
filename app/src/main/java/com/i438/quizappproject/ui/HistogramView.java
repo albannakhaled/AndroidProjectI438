@@ -93,4 +93,22 @@ public class HistogramView extends View {
         }
         return max;
     }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        int desiredWidth = calculateDesiredWidth();
+        int desiredHeight = 300; // Fixed height (match your XML)
+
+        // Resolve width based on parent constraints
+        int measuredWidth = resolveSizeAndState(desiredWidth, widthMeasureSpec, 0);
+        int measuredHeight = resolveSizeAndState(desiredHeight, heightMeasureSpec, 0);
+
+        setMeasuredDimension(measuredWidth, measuredHeight);
+    }
+
+    private int calculateDesiredWidth() {
+        if (data.isEmpty()) return 0;
+        return (int) (groupSpacing + (2 * barWidth + barSpacing + groupSpacing) * data.size());
+    }
+
 }

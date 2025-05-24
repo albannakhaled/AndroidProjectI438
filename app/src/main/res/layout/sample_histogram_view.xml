@@ -1,16 +1,44 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <com.i438.quizappproject.ui.HistogramView
-        style="@style/Widget.Theme.QuizAppProject.MyView"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:paddingLeft="20dp"
-        android:paddingBottom="40dp"
-        app:exampleDimension="24sp"
-        app:exampleDrawable="@android:drawable/ic_menu_add"
-        app:exampleString="Hello, HistogramView" />
+    <!-- Horizontal Scroll for Histogram -->
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
 
-</FrameLayout>
+        <com.i438.quizappproject.ui.HistogramView
+            android:id="@+id/histogram"
+            style="@style/Widget.Theme.QuizAppProject.MyView"
+            android:layout_width="wrap_content"
+            android:layout_height="300dp"
+            android:paddingLeft="20dp"
+            android:paddingBottom="40dp"
+            app:exampleDimension="24sp"
+            app:exampleDrawable="@android:drawable/ic_menu_add"
+            app:exampleString="Hello, HistogramView"/>
+
+    </HorizontalScrollView>
+
+    <!-- Back Button Container -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btn_back"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Back to Home"
+            android:backgroundTint="#1E88E5"
+            android:textColor="@android:color/white"/>
+
+    </LinearLayout>
+
+</LinearLayout>
