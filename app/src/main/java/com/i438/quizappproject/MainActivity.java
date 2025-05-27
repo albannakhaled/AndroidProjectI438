@@ -26,9 +26,10 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView welcomeText;
     private Button startQuizButton, viewHistoryButton, logoutButton;
+    //entry point for all Firebase Authentication operations
     private FirebaseAuth mAuth;
     private TextView textQuizzes, textBestScore;
-    private SharedPrefsManager prefsManager;
+    private SharedPrefsManager prefsManager; // handles local persistence
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -45,14 +46,16 @@ public class MainActivity extends AppCompatActivity {
         prefsManager = new SharedPrefsManager(this);
         updateStats();
         mAuth = FirebaseAuth.getInstance();
+        // checks if the user is authenticated
         FirebaseUser currentUser = mAuth.getCurrentUser();
 
+        // if the user is not authenticated, redirect to SignInActivity
         if (currentUser == null) {
             startActivity(new Intent(MainActivity.this, SignInActivity.class));
-            finish();
+            finish();// closes the current activity (MainActivity)
         } else {
-            String username = currentUser.getEmail();
-            welcomeText.setText(username.replace("@i438.com", ""));
+            String username = currentUser.getEmail(); // get the email of the current user
+            welcomeText.setText(username.replace("@i438.com", "")); // removes the domain part from the email
         }
 
         startQuizButton.setOnClickListener(v ->
@@ -86,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-//        prefsManager.clearCache();
+        // update stats when the activity is resumed
         updateStats();
     }
 

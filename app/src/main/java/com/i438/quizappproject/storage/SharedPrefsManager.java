@@ -11,6 +11,8 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+
+//local persistence
 public class SharedPrefsManager {
     private static final String PREFS_NAME = "quiz_prefs";
     private static final String KEY_HISTORY = "quiz_history";
@@ -21,17 +23,17 @@ public class SharedPrefsManager {
     private static final String KEY_BEST_SCORE = "best_score";
 
     public void saveQuizResult(int correct, int incorrect, int total) {
-        // Get existing history
+        // get existing history
         List<QuizHistoryEntry> history = getHistory();
 
-        // Add new entry
+        // add new entry
         history.add(new QuizHistoryEntry(correct, incorrect));
 
-        // Save updated history
+        // save updated history
         String json = gson.toJson(history);
         prefs.edit().putString(KEY_HISTORY, json).apply();
 
-        // Update quiz count and best score
+        // update quiz count and best score
         int quizCount = getQuizCount() + 1;
         prefs.edit().putInt(KEY_QUIZ_COUNT, quizCount).apply();
         float currentBest = prefs.getFloat(KEY_BEST_SCORE, 0);
@@ -55,9 +57,12 @@ public class SharedPrefsManager {
 
     public SharedPrefsManager(Context context) {
         prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-    }    public List<QuizHistoryEntry> getHistory() {
+    }
+    public List<QuizHistoryEntry> getHistory() {
         String json = prefs.getString(KEY_HISTORY, null);
+        // define the expected type for Gson deserialization
         Type type = new TypeToken<ArrayList<QuizHistoryEntry>>(){}.getType();
+        // convert JSON string into a List<QuizHistoryEntry>
         List<QuizHistoryEntry> history = gson.fromJson(json, type);
         return history != null ? history : new ArrayList<>();
     }

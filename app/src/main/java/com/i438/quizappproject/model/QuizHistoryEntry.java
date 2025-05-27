@@ -16,7 +16,6 @@ public class QuizHistoryEntry {
     public float getIncorrectPercent() {
         return (incorrect * 100f) / (correct + incorrect);
     }
-    // Getters and setters
     public int getCorrect() { return correct; }
     public int getIncorrect() { return incorrect; }
     public long getTimestamp() { return timestamp; }

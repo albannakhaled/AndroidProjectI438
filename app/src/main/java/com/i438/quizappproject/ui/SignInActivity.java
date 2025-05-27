@@ -25,7 +25,7 @@ public class SignInActivity extends AppCompatActivity {
     private TextView signUpLink;
     private ProgressBar progressBar;
 
-    private FirebaseAuth mAuth;
+    private FirebaseAuth mAuth;// to handle Firebase authentication
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -38,7 +38,7 @@ public class SignInActivity extends AppCompatActivity {
         signUpLink = findViewById(R.id.link_to_signup);
         progressBar = findViewById(R.id.progressBar);
 
-        mAuth = FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance();// Initialize Firebase Auth
 
         signInButton.setOnClickListener(view -> signIn());
 
@@ -56,7 +56,7 @@ public class SignInActivity extends AppCompatActivity {
             usernameInput.requestFocus();
             return;
         }
-        String usernamePattern = "^[a-zA-Z0-9_]+$";
+        String usernamePattern = "^[a-zA-Z0-9_]+$";// pattern to allow only letters, numbers, and underscores
         if (!username.matches(usernamePattern)) {
             usernameInput.setError("Username can only contain letters, numbers, and underscores");
             usernameInput.requestFocus();
@@ -72,12 +72,12 @@ public class SignInActivity extends AppCompatActivity {
         progressBar.setVisibility(View.VISIBLE);
         String email = username + "@i438.com";
         mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(task -> {
-                    progressBar.setVisibility(View.GONE);
+                .addOnCompleteListener(task -> { // task holds the result of the sign-in operation
+                    progressBar.setVisibility(View.GONE);// hide the progress bar after the task is complete
                     if (task.isSuccessful()) {
                         Toast.makeText(SignInActivity.this, "Login successful!", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(SignInActivity.this, MainActivity.class));
-                        finish();
+                        finish(); // close the SignInActivity so the user can't return to it by pressing back
                     } else {
                         Toast.makeText(SignInActivity.this, "Authentication failed: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
                     }

@@ -35,7 +35,7 @@ public class SignUpActivity extends AppCompatActivity {
     private TextView signInLink;
     private ProgressBar progressBar;
 
-    private FirebaseAuth mAuth;
+    private FirebaseAuth mAuth; // to handle Firebase authentication
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -80,11 +80,11 @@ public class SignUpActivity extends AppCompatActivity {
             confirmPasswordInput.setError("Passwords do not match");
             return;
         }
-        // Check if username is available
+        // check if username is available
         db.collection("usernames").document(username).get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        DocumentSnapshot document = task.getResult();
+                        DocumentSnapshot document = task.getResult();// document holds the data for the username
                         if (document.exists()) {
                             usernameInput.setError("Username already taken");
                         } else {
@@ -94,7 +94,7 @@ public class SignUpActivity extends AppCompatActivity {
                                         progressBar.setVisibility(View.GONE);
                                         if (createTask.isSuccessful()) {
                                             String userId = mAuth.getCurrentUser().getUid();
-                                            // Store username in Firestore
+                                            // store username in Firestore
                                             Map<String, Object> userData = new HashMap<>();
                                             userData.put("username", username);
 
